@@ -1,4 +1,4 @@
-import { ButtonStyle } from "../ButtonAdd/style";
+import { ButtonStyle } from "../../ProductItem/ButtonAdd/style";
 
 const Button = ({ ...rest }) => {
   return <ButtonStyle {...rest}></ButtonStyle>;

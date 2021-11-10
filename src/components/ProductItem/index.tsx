@@ -1,5 +1,5 @@
 import { ComponentItem } from "../../types";
-import ButtonAdd from "../ButtonsComponent/ButtonAdd";
+import ButtonAdd from "./ButtonAdd";
 import { ItemStyle } from "./style";
 
 const ProductItem = ({ item }: ComponentItem) => {

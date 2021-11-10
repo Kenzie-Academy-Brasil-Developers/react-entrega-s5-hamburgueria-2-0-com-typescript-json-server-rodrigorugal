@@ -17,12 +17,28 @@ export const FullScreen = styled.main`
     display: flex;
     align-items: center;
     justify-content: space-around;
+
+    h3 {
+      padding: 10px;
+      background: #ffffff;
+      width: 83px;
+      cursor: pointer;
+      border-bottom: 3px solid green;
+      border-radius: 5px;
+
+      &:hover {
+        background-color: #80e57e;
+      }
+    }
   }
 `;
 
 export const BodyStyle = styled.section`
   width: 100%;
   height: 90%;
+
+  overflow: auto;
+  position: relative;
 
   ul {
     width: 100%;
@@ -32,6 +48,7 @@ export const BodyStyle = styled.section`
     overflow: auto;
 
     display: flex;
+
     flex-wrap: wrap;
   }
 `;

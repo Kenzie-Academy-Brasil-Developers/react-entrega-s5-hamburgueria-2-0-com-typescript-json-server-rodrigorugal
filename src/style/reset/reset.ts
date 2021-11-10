@@ -53,8 +53,8 @@ table {
 }
 
 ::-webkit-scrollbar {
-	width: 2px;               /* width of the entire scrollbar */
-	height: 5px;
+	width: 0px;               /* width of the entire scrollbar */
+	height: 0px;
 	margin: 0;
   }
   

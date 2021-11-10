@@ -11,7 +11,7 @@ const Routes = () => {
         <Login />
       </Route>
 
-      <Route>
+      <Route path="/Register">
         <Register />
       </Route>
 

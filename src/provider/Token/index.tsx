@@ -14,7 +14,7 @@ export const TokenProvider = ({ children }: ChildrensProdivers) => {
   const [token, setToken] = useState("");
 
   const addToken = (access: string) => {
-    localStorage.setItem("@Habits:Token", JSON.stringify(access));
+    localStorage.setItem("@Hamburgueria:Token", JSON.stringify(access));
     setToken(access);
   };
 

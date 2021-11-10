@@ -29,9 +29,8 @@ const Register = () => {
     name: yup.string().required("Nome de usuário obrigatório "),
     email: yup
       .string()
-      .trim()
-      .required("E-mail é obrigatório")
-      .email("Não é um e-mail válido"),
+      .email("Não é um e-mail válido")
+      .required("E-mail é obrigatório"),
     password: yup.string().required("Digite sua Senha"),
   });
 
@@ -42,10 +41,12 @@ const Register = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const handlerRegister = (data: RegisterDataForm) => {
+    console.log(data);
+
     api
       .post("/Register", data)
       .then((response) => {
-        history.push("/Login");
+        history.push("/");
       })
       .catch((er) => console.log(er));
   };
@@ -57,29 +58,20 @@ const Register = () => {
         <form onSubmit={handleSubmit(handlerRegister)}>
           <BoxInput>
             <label>Nome</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(ev) => setName(ev.target.value)}
-            />
+            <input type="text" {...register("name")} />
+            {errors.name?.message}
           </BoxInput>
 
           <BoxInput>
             <label>E-mail</label>
-            <input
-              type="text"
-              value={email}
-              onChange={(ev) => setEmail(ev.target.value)}
-            />
+            <input type="text" {...register("email")} />
+            {errors.email?.message}
           </BoxInput>
 
           <BoxInput>
             <label>Senha</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(ev) => setPassword(ev.target.value)}
-            />
+            <input type="password" {...register("password")} />
+            {errors.password?.message}
           </BoxInput>
 
           <Button type="submit">Registrar</Button>

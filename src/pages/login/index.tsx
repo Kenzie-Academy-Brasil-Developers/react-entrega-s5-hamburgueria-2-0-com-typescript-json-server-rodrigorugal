@@ -3,7 +3,6 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Button from "../../components/ButtonsComponent/Button";
-import jwt_decode from "jwt-decode";
 
 import { AreaLogin, BackGroundBurguer, BoxInput, ScreenLogin } from "./style";
 import { api } from "../../service/api";
@@ -12,20 +11,20 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 
 interface LoginDataForm {
-  name: string;
+  email: string;
   password: string;
 }
 
 const Login = () => {
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-
   const history = useHistory();
 
   const { addToken } = useContext(TokenContext);
 
   const schema = yup.object().shape({
-    name: yup.string().required("Nome de usuário obrigatório "),
+    email: yup
+      .string()
+      .email("E-mail inválido")
+      .required("E-mail de usuário obrigatório "),
     password: yup.string().required("Digite sua Senha"),
   });
 
@@ -39,8 +38,8 @@ const Login = () => {
     api
       .post("/login", data)
       .then((response) => {
-        addToken(response.data.access);
-        const decoded = jwt_decode(response.data.access);
+        addToken(response.data.accessToken);
+
         history.push("/Home");
       })
       .catch((er) => console.log(er));
@@ -52,21 +51,15 @@ const Login = () => {
         <h1>Login</h1>
         <form onSubmit={handleSubmit(handlerLogin)}>
           <BoxInput>
-            <label>Nome</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(ev) => setName(ev.target.value)}
-            />
+            <label>E-mail</label>
+            <input type="text" {...register("email")} />
+            {errors.email?.message}
           </BoxInput>
 
           <BoxInput>
             <label>Senha</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(ev) => setPassword(ev.target.value)}
-            />
+            <input type="password" {...register("password")} />
+            {errors.password?.message}
           </BoxInput>
 
           <Button type="submit">Entrar</Button>
